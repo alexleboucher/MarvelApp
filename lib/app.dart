@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:marvel_app/bloc/theme/theme_cubit.dart';
 import 'package:marvel_app/utils/app_theme.dart';
@@ -31,9 +28,6 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 3), () {
-      FlutterNativeSplash.remove();
-    });
     final themeCubit = context.read<ThemeCubit>();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -45,8 +39,9 @@ class AppView extends StatelessWidget {
               'Hello World!',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold),
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             ElevatedButton(
               onPressed: themeCubit.toggleTheme,

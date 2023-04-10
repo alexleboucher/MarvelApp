@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_launcher_icons: ^0.13.0
   flutter_native_splash: ^2.2.19
   gap: ^2.0.1
   google_fonts: ^4.0.3
@@ -35,3 +36,11 @@ flutter_native_splash:
   android_12:
     color: "#000000"
     image: "assets/splash.png"
+
+flutter_icons:
+  image_path: "assets/launcher_icon.png"
+  adaptive_icon_background: "assets/launcher_bg.png"
+  adaptive_icon_foreground: "assets/launcher_icon.png"
+  android: true
+  ios: true
+  remove_alpha_ios: true
