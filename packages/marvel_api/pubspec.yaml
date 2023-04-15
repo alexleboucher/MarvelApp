@@ -1,0 +1,13 @@
+name: marvel_api
+description: The interface and models for the Marvel API.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dev_dependencies:
+  very_good_analysis: ^4.0.0+1
+dependencies:
+  crypto: ^3.0.2
+  http: ^0.13.5

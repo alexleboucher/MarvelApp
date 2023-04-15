@@ -1,0 +1,14 @@
+name: marvel_repository
+description: The interface and models for the Marvel Repository.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  marvel_api:
+    path: ../marvel_api
+
+dev_dependencies:
+  very_good_analysis: ^4.0.0+1

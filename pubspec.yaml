@@ -21,6 +21,8 @@ dependencies:
   intl: ^0.18.0
   path_provider: ^2.0.14
   very_good_analysis: ^4.0.0+1
+  marvel_repository:
+    path: packages/marvel_repository
 
 dev_dependencies:
   flutter_lints: ^2.0.0
