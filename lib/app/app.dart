@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:marvel_app/bloc/theme/theme_cubit.dart';
-import 'package:marvel_app/utils/app_theme.dart';
+import 'package:marvel_app/app/bloc/theme/theme_cubit.dart';
+import 'package:marvel_app/app/utils/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,10 +11,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => ThemeCubit(),
-      child: BlocBuilder<ThemeCubit, ThemeMode>(
-        builder: (context, themeMode) {
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, theme) {
           return MaterialApp(
-            theme: AppTheme.getTheme(themeMode: themeMode),
+            theme: AppTheme.getTheme(themeMode: theme.themeMode),
             home: const AppView(),
           );
         },
@@ -46,7 +46,7 @@ class AppView extends StatelessWidget {
             ElevatedButton(
               onPressed: themeCubit.toggleTheme,
               child: Text(
-                'Change theme to ${themeCubit.state == ThemeMode.light ? 'dark' : 'light'}',
+                'Change theme to ${themeCubit.state.themeMode == ThemeMode.light ? 'dark' : 'light'}',
               ),
             )
           ],
