@@ -13,9 +13,13 @@ final ColorScheme darkColorScheme = ColorScheme.fromSeed(
 
 class AppTheme {
   static ThemeData getTheme({required ThemeMode themeMode}) {
+    final colorScheme =
+        themeMode == ThemeMode.light ? lightColorScheme : darkColorScheme;
     return ThemeData(
-      colorScheme:
-          themeMode == ThemeMode.light ? lightColorScheme : darkColorScheme,
+      colorScheme: colorScheme,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor: colorScheme.primary,
+      ),
       useMaterial3: true,
     );
   }
