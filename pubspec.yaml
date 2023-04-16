@@ -13,16 +13,17 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
+  flutter_dotenv: ^5.0.2
   flutter_launcher_icons: ^0.13.0
   flutter_native_splash: ^2.2.19
   gap: ^2.0.1
   google_fonts: ^4.0.3
   http: ^0.13.5
   intl: ^0.18.0
-  path_provider: ^2.0.14
-  very_good_analysis: ^4.0.0+1
   marvel_repository:
     path: packages/marvel_repository
+  path_provider: ^2.0.14
+  very_good_analysis: ^4.0.0+1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -31,6 +32,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+  - .env
 
 flutter_native_splash:
   color: "#000000"

@@ -3,7 +3,8 @@ import 'package:marvel_api/marvel_api.dart' hide Character;
 import 'package:marvel_repository/marvel_repository.dart';
 
 class MarvelRepository {
-  MarvelRepository() : _marvelApi = MarvelApi();
+  MarvelRepository({required Configuration configuration})
+      : _marvelApi = MarvelApi(configuration: configuration);
 
   final MarvelApi _marvelApi;
 

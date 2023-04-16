@@ -1,20 +1,7 @@
-import 'dart:convert';
+part of 'marvel_api.dart';
 
-import 'package:crypto/crypto.dart';
-import 'package:http/http.dart' as http;
-
-import 'package:marvel_api/src/models/character.dart';
-
-const baseUrlMarvel = 'gateway.marvel.com';
-
-class MarvelRequestFailure implements Exception {}
-
-class MarvelApi {
-  MarvelApi() : _httpClient = http.Client();
-
-  final http.Client _httpClient;
-
-  Future<List<Character>> getCharacters() async {
+extension MarvelComicsApi on MarvelApi {
+  Future<List<Character>> getComics() async {
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     const apikey = 'cf07a492c20e21a5319e53da7f66a823';
     final hash = md5
@@ -35,7 +22,6 @@ class MarvelApi {
     final charactersResponse = await _httpClient.get(request);
 
     if (charactersResponse.statusCode != 200) {
-      print(charactersResponse.body);
       throw MarvelRequestFailure();
     }
 
