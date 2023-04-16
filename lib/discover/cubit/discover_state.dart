@@ -12,22 +12,22 @@ extension DiscoverStatusX on DiscoverStatus {
 class DiscoverState extends Equatable {
   const DiscoverState({
     this.status = DiscoverStatus.initial,
-    this.characters = const [],
+    this.comics = const [],
   });
 
   final DiscoverStatus status;
-  final List<Character> characters;
+  final List<Comic> comics;
 
   @override
-  List<Object> get props => [status, characters];
+  List<Object> get props => [status, comics];
 
   DiscoverState copyWith({
     DiscoverStatus? status,
-    List<Character>? characters,
+    List<Comic>? comics,
   }) {
     return DiscoverState(
       status: status ?? this.status,
-      characters: characters ?? this.characters,
+      comics: comics ?? this.comics,
     );
   }
 }

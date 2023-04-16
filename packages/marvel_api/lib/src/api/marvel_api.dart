@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
-
-import 'package:marvel_api/src/models/character.dart';
+import 'package:marvel_api/marvel_api.dart';
 
 part 'marvel_characters_api.dart';
 part 'marvel_comics_api.dart';
