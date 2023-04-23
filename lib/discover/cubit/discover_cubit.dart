@@ -15,7 +15,10 @@ class DiscoverCubit extends Cubit<DiscoverState> {
     emit(const DiscoverState(status: DiscoverStatus.loading));
 
     try {
-      final comicsResponse = await _marvelRepository.getComics();
+      final comicsResponse = await _marvelRepository.getComics(
+        dateDescriptor: DateDescriptor.thisWeek,
+        orderBy: OrderBy.onsaleDateASC,
+      );
 
       emit(
         state.copyWith(
@@ -30,7 +33,7 @@ class DiscoverCubit extends Cubit<DiscoverState> {
   }
 
   Future<void> fetchMoreComics() async {
-    emit(state.copyWith(status: DiscoverStatus.loading));
+    emit(state.copyWith(status: DiscoverStatus.loadingMore));
 
     try {
       final comicsResponse =

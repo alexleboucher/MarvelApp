@@ -1,10 +1,11 @@
 part of 'discover_cubit.dart';
 
-enum DiscoverStatus { initial, loading, success, failure }
+enum DiscoverStatus { initial, loading, loadingMore, success, failure }
 
 extension DiscoverStatusX on DiscoverStatus {
   bool get isInitial => this == DiscoverStatus.initial;
   bool get isLoading => this == DiscoverStatus.loading;
+  bool get isLoadingMore => this == DiscoverStatus.loadingMore;
   bool get isSuccess => this == DiscoverStatus.success;
   bool get isFailure => this == DiscoverStatus.failure;
 }

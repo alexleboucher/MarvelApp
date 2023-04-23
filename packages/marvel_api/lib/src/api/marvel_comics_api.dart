@@ -1,21 +1,57 @@
 part of 'marvel_api.dart';
 
+enum DateDescriptor { lastWeek, thisWeek, nextWeek, thisMonth }
+
+enum FormatType { comic, collection }
+
+enum OrderBy {
+  focDateASC,
+  onsaleDateASC,
+  titleASC,
+  issueNumberASC,
+  modifiedASC,
+  focDateDESC,
+  onsaleDateDESC,
+  titleDESC,
+  issueNumberDESC,
+  modifiedDESC,
+}
+
+extension ParseToString on OrderBy {
+  String parseToString() {
+    var value = name;
+    if (value.contains('ASC')) {
+      value = value.replaceFirst('ASC', '');
+    }
+    if (value.contains('DESC')) {
+      value = value.replaceFirst('DESC', '');
+      value = '-$value';
+    }
+    return value;
+  }
+}
+
 extension MarvelComicsApi on MarvelApi {
   Future<ApiResponse<Comic>> getComics({
     int offset = 0,
     int limit = 20,
+    DateDescriptor? dateDescriptor,
+    OrderBy orderBy = OrderBy.titleASC,
+    FormatType formatType = FormatType.comic,
   }) async {
     final credentials = _getCredentials();
     final request = Uri.https(
       baseUrlMarvel,
       '/v1/public/comics',
       {
-        'orderBy': '-modified',
         'apikey': credentials.apiKey,
         'ts': credentials.timestamp,
         'hash': credentials.hash,
         'offset': offset.toString(),
         'limit': limit.toString(),
+        'orderBy': orderBy.parseToString(),
+        'formatType': formatType.name,
+        if (dateDescriptor != null) 'dateDescriptor': dateDescriptor.name,
       },
     );
 

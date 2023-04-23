@@ -4,10 +4,16 @@ extension MarvelComicsRepository on MarvelRepository {
   Future<ApiResponse<Comic>> getComics({
     int offset = 0,
     int limit = 20,
+    DateDescriptor? dateDescriptor,
+    OrderBy orderBy = OrderBy.titleASC,
+    FormatType formatType = FormatType.comic,
   }) async {
     final comicsResponse = await _marvelApi.getComics(
       offset: offset,
       limit: limit,
+      dateDescriptor: dateDescriptor,
+      orderBy: orderBy,
+      formatType: formatType,
     );
 
     final results = <Comic>[];
