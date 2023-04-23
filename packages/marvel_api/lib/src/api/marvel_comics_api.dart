@@ -1,7 +1,10 @@
 part of 'marvel_api.dart';
 
 extension MarvelComicsApi on MarvelApi {
-  Future<List<Comic>> getComics() async {
+  Future<ApiResponse<Comic>> getComics({
+    int offset = 0,
+    int limit = 20,
+  }) async {
     final credentials = _getCredentials();
     final request = Uri.https(
       baseUrlMarvel,
@@ -11,6 +14,8 @@ extension MarvelComicsApi on MarvelApi {
         'apikey': credentials.apiKey,
         'ts': credentials.timestamp,
         'hash': credentials.hash,
+        'offset': offset.toString(),
+        'limit': limit.toString(),
       },
     );
 
@@ -22,10 +27,15 @@ extension MarvelComicsApi on MarvelApi {
 
     final comicsJson = jsonDecode(comicsResponse.body) as Map;
 
-    final results = (comicsJson['data'] as Map)['results'] as List;
+    final data = comicsJson['data'] as Map<String, dynamic>;
+    final results = data['results'] as List;
 
-    return results
-        .map((e) => Comic.fromJson(e as Map<String, dynamic>))
-        .toList();
+    final comics =
+        results.map((e) => Comic.fromJson(e as Map<String, dynamic>)).toList();
+
+    return ApiResponse.fromJson(
+      data: data,
+      results: comics,
+    );
   }
 }

@@ -24,22 +24,39 @@ class DiscoverView extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeMode =
         context.select((ThemeCubit cubit) => cubit.state.themeMode);
+
+    void fetchMore() {
+      context.read<DiscoverCubit>().fetchMoreComics();
+    }
+
     return BlocBuilder<DiscoverCubit, DiscoverState>(
       builder: (context, state) {
         return RefreshIndicator(
           onRefresh: () => context.read<DiscoverCubit>().refreshComics(),
           child: Column(
             children: [
-              if (state.status.isLoading) const Text('Loading...'),
-              if (state.status.isSuccess)
-                SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Center(
-                    child: Column(
-                      children: state.comics.map((e) => Text(e.title)).toList(),
+              if (!state.status.isFailure && state.comics.isNotEmpty)
+                SizedBox(
+                  height: 600,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Center(
+                      child: Column(
+                        children:
+                            state.comics.map((e) => Text(e.title)).toList(),
+                      ),
                     ),
                   ),
                 ),
+              if (state.status.isLoading) const Text('Loading...'),
+              Center(
+                child: ElevatedButton(
+                  onPressed: fetchMore,
+                  child: const Text(
+                    'Load More',
+                  ),
+                ),
+              ),
               Center(
                 child: ElevatedButton(
                   onPressed: context.read<ThemeCubit>().toggleTheme,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/discover/discover.dart';
 import 'package:marvel_app/home/home.dart';
-import 'package:marvel_repository/marvel_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

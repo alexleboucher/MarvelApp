@@ -13,10 +13,12 @@ class DiscoverState extends Equatable {
   const DiscoverState({
     this.status = DiscoverStatus.initial,
     this.comics = const [],
+    this.total = 0,
   });
 
   final DiscoverStatus status;
   final List<Comic> comics;
+  final int total;
 
   @override
   List<Object> get props => [status, comics];
@@ -24,10 +26,12 @@ class DiscoverState extends Equatable {
   DiscoverState copyWith({
     DiscoverStatus? status,
     List<Comic>? comics,
+    int? total,
   }) {
     return DiscoverState(
       status: status ?? this.status,
       comics: comics ?? this.comics,
+      total: total ?? this.total,
     );
   }
 }

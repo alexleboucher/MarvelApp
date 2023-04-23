@@ -15,12 +15,32 @@ class DiscoverCubit extends Cubit<DiscoverState> {
     emit(const DiscoverState(status: DiscoverStatus.loading));
 
     try {
-      final comics = await _marvelRepository.getComics();
+      final comicsResponse = await _marvelRepository.getComics();
 
       emit(
         state.copyWith(
           status: DiscoverStatus.success,
-          comics: comics,
+          comics: comicsResponse.results,
+          total: comicsResponse.total,
+        ),
+      );
+    } on Exception {
+      emit(state.copyWith(status: DiscoverStatus.failure));
+    }
+  }
+
+  Future<void> fetchMoreComics() async {
+    emit(state.copyWith(status: DiscoverStatus.loading));
+
+    try {
+      final comicsResponse =
+          await _marvelRepository.getComics(offset: state.comics.length);
+
+      emit(
+        state.copyWith(
+          status: DiscoverStatus.success,
+          comics: [...state.comics, ...comicsResponse.results],
+          total: comicsResponse.total,
         ),
       );
     } on Exception {
@@ -30,24 +50,6 @@ class DiscoverCubit extends Cubit<DiscoverState> {
 
   Future<void> refreshComics() async {
     if (!state.status.isSuccess) return;
-
-    emit(
-      const DiscoverState(
-        status: DiscoverStatus.loading,
-      ),
-    );
-
-    try {
-      final comics = await _marvelRepository.getComics();
-
-      emit(
-        state.copyWith(
-          status: DiscoverStatus.success,
-          comics: comics,
-        ),
-      );
-    } on Exception {
-      emit(state.copyWith(status: DiscoverStatus.failure));
-    }
+    await fetchComics();
   }
 }

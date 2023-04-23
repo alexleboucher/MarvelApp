@@ -10,7 +10,9 @@ class App extends StatelessWidget {
   App({super.key})
       : _marvelRepository = MarvelRepository(
           configuration: Configuration(
+            // ignore: cast_nullable_to_non_nullable
             publicApiKey: dotenv.env['MARVEL_PUBLIC_KEY'] as String,
+            // ignore: cast_nullable_to_non_nullable
             privateApiKey: dotenv.env['MARVEL_PRIVATE_KEY'] as String,
           ),
         );
