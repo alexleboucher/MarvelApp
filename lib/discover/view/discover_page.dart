@@ -47,6 +47,7 @@ class DiscoverView extends StatelessWidget {
                 status: state.comicsReleasedLastWeekStatus,
                 comics: state.comicsReleasedLastWeek,
               ),
+              const Gap(10),
             ],
           ),
         );

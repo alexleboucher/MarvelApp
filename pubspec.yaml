@@ -19,6 +19,7 @@ dependencies:
   gap: ^2.0.1
   google_fonts: ^4.0.3
   http: ^0.13.5
+  hydrated_bloc: ^9.1.0
   intl: ^0.18.0
   marvel_repository:
     path: packages/marvel_repository
