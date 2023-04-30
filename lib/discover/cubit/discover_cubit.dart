@@ -6,13 +6,19 @@ part 'discover_state.dart';
 
 class DiscoverCubit extends Cubit<DiscoverState> {
   DiscoverCubit(this._marvelRepository) : super(const DiscoverState()) {
-    fetchComics();
+    fetchNewThisWeekComics();
+    fetchReleasedLastWeekComics();
   }
 
   final MarvelRepository _marvelRepository;
 
-  Future<void> fetchComics() async {
-    emit(const DiscoverState(status: DiscoverStatus.loading));
+  Future<void> fetchNewThisWeekComics() async {
+    emit(
+      state.copyWith(
+        comicsNewThisWeekStatus: DiscoverStatus.loading,
+        comicsNewThisWeek: [],
+      ),
+    );
 
     try {
       final comicsResponse = await _marvelRepository.getComics(
@@ -22,37 +28,38 @@ class DiscoverCubit extends Cubit<DiscoverState> {
 
       emit(
         state.copyWith(
-          status: DiscoverStatus.success,
-          comics: comicsResponse.results,
-          total: comicsResponse.total,
+          comicsNewThisWeekStatus: DiscoverStatus.success,
+          comicsNewThisWeek: comicsResponse.results,
         ),
       );
     } on Exception {
-      emit(state.copyWith(status: DiscoverStatus.failure));
+      emit(state.copyWith(comicsNewThisWeekStatus: DiscoverStatus.failure));
     }
   }
 
-  Future<void> fetchMoreComics() async {
-    emit(state.copyWith(status: DiscoverStatus.loadingMore));
+  Future<void> fetchReleasedLastWeekComics() async {
+    emit(
+      state.copyWith(
+        comicsReleasedLastWeekStatus: DiscoverStatus.loading,
+        comicsReleasedLastWeek: [],
+      ),
+    );
 
     try {
-      final comicsResponse =
-          await _marvelRepository.getComics(offset: state.comics.length);
+      final comicsResponse = await _marvelRepository.getComics(
+        dateDescriptor: DateDescriptor.lastWeek,
+        orderBy: OrderBy.onsaleDateASC,
+      );
 
       emit(
         state.copyWith(
-          status: DiscoverStatus.success,
-          comics: [...state.comics, ...comicsResponse.results],
-          total: comicsResponse.total,
+          comicsReleasedLastWeekStatus: DiscoverStatus.success,
+          comicsReleasedLastWeek: comicsResponse.results,
         ),
       );
     } on Exception {
-      emit(state.copyWith(status: DiscoverStatus.failure));
+      emit(
+          state.copyWith(comicsReleasedLastWeekStatus: DiscoverStatus.failure));
     }
-  }
-
-  Future<void> refreshComics() async {
-    if (!state.status.isSuccess) return;
-    await fetchComics();
   }
 }

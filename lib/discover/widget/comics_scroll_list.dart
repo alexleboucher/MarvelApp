@@ -7,10 +7,12 @@ import 'package:marvel_repository/marvel_repository.dart';
 class ComicsScrollList extends StatelessWidget {
   const ComicsScrollList({
     required this.status,
+    required this.title,
     super.key,
     this.comics = const [],
   });
 
+  final String title;
   final List<Comic> comics;
   final DiscoverStatus status;
 
@@ -18,9 +20,9 @@ class ComicsScrollList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: TitleSeeAll(title: 'New this week'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: TitleSeeAll(title: title),
         ),
         if (![DiscoverStatus.failure, DiscoverStatus.loading].contains(status))
           Container(
@@ -43,6 +45,13 @@ class ComicsScrollList extends StatelessWidget {
               }).toList(),
             ),
           ),
+        if (status == DiscoverStatus.loading)
+          const SizedBox(
+            height: 250,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
       ],
     );
   }

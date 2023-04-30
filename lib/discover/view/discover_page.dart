@@ -37,9 +37,16 @@ class DiscoverView extends StatelessWidget {
               ),
               const Gap(20),
               ComicsScrollList(
-                status: state.status,
-                comics: state.comics,
-              )
+                title: 'New this week',
+                status: state.comicsNewThisWeekStatus,
+                comics: state.comicsNewThisWeek,
+              ),
+              const Gap(20),
+              ComicsScrollList(
+                title: 'Released last week',
+                status: state.comicsReleasedLastWeekStatus,
+                comics: state.comicsReleasedLastWeek,
+              ),
             ],
           ),
         );

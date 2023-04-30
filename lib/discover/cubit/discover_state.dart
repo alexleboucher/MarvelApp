@@ -1,38 +1,49 @@
 part of 'discover_cubit.dart';
 
-enum DiscoverStatus { initial, loading, loadingMore, success, failure }
+enum DiscoverStatus { initial, loading, success, failure }
 
 extension DiscoverStatusX on DiscoverStatus {
   bool get isInitial => this == DiscoverStatus.initial;
   bool get isLoading => this == DiscoverStatus.loading;
-  bool get isLoadingMore => this == DiscoverStatus.loadingMore;
   bool get isSuccess => this == DiscoverStatus.success;
   bool get isFailure => this == DiscoverStatus.failure;
 }
 
 class DiscoverState extends Equatable {
   const DiscoverState({
-    this.status = DiscoverStatus.initial,
-    this.comics = const [],
-    this.total = 0,
+    this.comicsNewThisWeekStatus = DiscoverStatus.initial,
+    this.comicsReleasedLastWeekStatus = DiscoverStatus.initial,
+    this.comicsNewThisWeek = const [],
+    this.comicsReleasedLastWeek = const [],
   });
 
-  final DiscoverStatus status;
-  final List<Comic> comics;
-  final int total;
+  final DiscoverStatus comicsNewThisWeekStatus;
+  final DiscoverStatus comicsReleasedLastWeekStatus;
+  final List<Comic> comicsNewThisWeek;
+  final List<Comic> comicsReleasedLastWeek;
 
   @override
-  List<Object> get props => [status, comics];
+  List<Object> get props => [
+        comicsNewThisWeekStatus,
+        comicsReleasedLastWeekStatus,
+        comicsNewThisWeek,
+        comicsReleasedLastWeek,
+      ];
 
   DiscoverState copyWith({
-    DiscoverStatus? status,
-    List<Comic>? comics,
-    int? total,
+    DiscoverStatus? comicsNewThisWeekStatus,
+    DiscoverStatus? comicsReleasedLastWeekStatus,
+    List<Comic>? comicsNewThisWeek,
+    List<Comic>? comicsReleasedLastWeek,
   }) {
     return DiscoverState(
-      status: status ?? this.status,
-      comics: comics ?? this.comics,
-      total: total ?? this.total,
+      comicsNewThisWeekStatus:
+          comicsNewThisWeekStatus ?? this.comicsNewThisWeekStatus,
+      comicsReleasedLastWeekStatus:
+          comicsReleasedLastWeekStatus ?? this.comicsReleasedLastWeekStatus,
+      comicsNewThisWeek: comicsNewThisWeek ?? this.comicsNewThisWeek,
+      comicsReleasedLastWeek:
+          comicsReleasedLastWeek ?? this.comicsReleasedLastWeek,
     );
   }
 }
