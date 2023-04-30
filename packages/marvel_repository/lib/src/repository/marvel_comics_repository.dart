@@ -19,7 +19,8 @@ extension MarvelComicsRepository on MarvelRepository {
     final results = <Comic>[];
 
     for (final comic in comicsResponse.results) {
-      final thumbnailUrl = comic.thumbnail != null
+      final thumbnailUrl = comic.thumbnail != null &&
+              !comic.thumbnail!.path.contains('image_not_available')
           ? '${comic.thumbnail!.path}.${comic.thumbnail!.extension}'
           : null;
 
@@ -32,6 +33,20 @@ extension MarvelComicsRepository on MarvelRepository {
         ),
       );
     }
+
+    // Sort the result show the comics with thumbnail image first
+    results.sort((a, b) {
+      if (a.thumbnailUrl == b.thumbnailUrl) {
+        return 0;
+      }
+      if (a.thumbnailUrl == null) {
+        return 1;
+      }
+      if (b.thumbnailUrl == null) {
+        return -1;
+      }
+      return 0;
+    });
 
     return ApiResponse(
       total: comicsResponse.total,
