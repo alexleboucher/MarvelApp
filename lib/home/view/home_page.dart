@@ -1,6 +1,6 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvel_app/app/app.dart';
 import 'package:marvel_app/discover/discover.dart';
 import 'package:marvel_app/home/home.dart';
 
@@ -16,37 +16,35 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  @override
   Widget build(BuildContext context) {
-    final themeMode =
-        context.select((ThemeCubit cubit) => cubit.state.themeMode);
+    final curentTab = context.select((HomeCubit cubit) => cubit.state.tab);
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: IndexedStack(
-          index: context.select((HomeCubit cubit) => cubit.state.tab.index),
-          children: [
-            const DiscoverPage(),
-            Center(
-              child: ElevatedButton(
-                onPressed: context.read<ThemeCubit>().toggleTheme,
-                child: Text(
-                  'Change theme to ${themeMode == ThemeMode.light ? 'dark' : 'light'}',
-                ),
-              ),
-            ),
-            const Placeholder(),
+          index: curentTab.index,
+          children: const [
+            DiscoverPage(),
+            Placeholder(),
+            Placeholder(),
           ],
         ),
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        toolbarHeight: 50,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => context.beamToNamed('/settings'),
+          ),
+        ],
       ),
       bottomNavigationBar: const NavigationBottomBar(),
     );

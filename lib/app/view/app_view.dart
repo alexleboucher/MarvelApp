@@ -1,10 +1,11 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import 'package:marvel_app/app/app.dart';
 import 'package:marvel_app/app/cubit/favorites_cubit.dart';
 import 'package:marvel_app/home/home.dart';
+import 'package:marvel_app/settings/view/settings_page.dart';
 import 'package:marvel_repository/marvel_repository.dart';
 
 class App extends StatelessWidget {
@@ -19,6 +20,15 @@ class App extends StatelessWidget {
         );
 
   final MarvelRepository _marvelRepository;
+
+  final routerDelegate = BeamerDelegate(
+    locationBuilder: RoutesLocationBuilder(
+      routes: {
+        '/': (context, state, data) => const HomePage(),
+        '/settings': (context, state, data) => const SettingsPage(),
+      },
+    ).call,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +45,10 @@ class App extends StatelessWidget {
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, theme) {
-            return MaterialApp(
+            return MaterialApp.router(
               theme: AppTheme.getTheme(themeMode: theme.themeMode),
-              home: const HomePage(),
+              routerDelegate: routerDelegate,
+              routeInformationParser: BeamerParser(),
             );
           },
         ),
