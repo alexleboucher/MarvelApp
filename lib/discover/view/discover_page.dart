@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:marvel_app/app/cubit/favorites_cubit.dart';
 
 import 'package:marvel_app/discover/discover.dart';
 import 'package:marvel_app/discover/widget/comics_scroll_list.dart';
+import 'package:marvel_app/discover/widget/favorite_comics_list.dart';
 import 'package:marvel_repository/marvel_repository.dart';
 
 class DiscoverPage extends StatelessWidget {
@@ -35,19 +35,7 @@ class DiscoverView extends StatelessWidget {
             ),
           ),
           const Gap(20),
-          BlocBuilder<FavoritesCubit, FavoritesState>(
-            builder: (context, state) {
-              return Column(
-                children: [
-                  ComicsScrollList(
-                    title: 'Your favorites',
-                    status: DiscoverStatus.success,
-                    comics: state.favoriteComics,
-                  ),
-                ],
-              );
-            },
-          ),
+          const FavoriteComicsList(),
           const Gap(20),
           BlocBuilder<DiscoverCubit, DiscoverState>(
             builder: (context, state) {

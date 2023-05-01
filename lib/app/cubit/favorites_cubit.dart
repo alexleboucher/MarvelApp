@@ -28,14 +28,21 @@ class FavoritesCubit extends HydratedCubit<FavoritesState> {
 
   @override
   FavoritesState? fromJson(Map<String, dynamic> json) {
-    final favoriteComicsJson =
-        jsonDecode(json['favoriteComics'] as String) as List;
-    final favoriteComics = favoriteComicsJson
-        .map((f) => Comic.fromJson(f as Map<String, dynamic>))
-        .toList();
-    return FavoritesState(
-      favoriteComics: favoriteComics,
-    );
+    try {
+      final favoriteComicsJson =
+          jsonDecode(json['favoriteComics'] as String) as List;
+      final favoriteComics = favoriteComicsJson
+          .map((f) => Comic.fromJson(f as Map<String, dynamic>))
+          .toList();
+      return FavoritesState(
+        favoriteComics: favoriteComics,
+        favoriteStatus: FavoritesStatus.success,
+      );
+    } on Exception {
+      return const FavoritesState(
+        favoriteStatus: FavoritesStatus.failure,
+      );
+    }
   }
 
   @override

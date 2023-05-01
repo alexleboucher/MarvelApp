@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/discover/discover.dart';
+import 'package:marvel_app/home/cubit/home_cubit.dart';
 import 'package:marvel_app/shared/widgets/comic_card.dart';
 import 'package:marvel_app/shared/widgets/title_see_all.dart';
 import 'package:marvel_repository/marvel_repository.dart';
@@ -18,13 +20,17 @@ class ComicsScrollList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: TitleSeeAll(title: title),
+          child: TitleSeeAll(
+            title: title,
+            onSeeAllClick: () => homeCubit.setTab(HomeTab.search),
+          ),
         ),
-        if (![DiscoverStatus.failure, DiscoverStatus.loading].contains(status))
+        if (!status.isLoading && !status.isFailure)
           Container(
             margin: const EdgeInsets.only(top: 10),
             height: 250,
@@ -44,7 +50,7 @@ class ComicsScrollList extends StatelessWidget {
               }).toList(),
             ),
           ),
-        if (status == DiscoverStatus.loading)
+        if (status.isLoading)
           const SizedBox(
             height: 250,
             child: Center(
