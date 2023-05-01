@@ -38,8 +38,7 @@ class ComicsScrollList extends StatelessWidget {
                 final index = comics.indexOf(comic);
                 final isLast = index == comics.length - 1;
                 return ComicCard(
-                  imageUrl: comic.thumbnailUrl,
-                  title: comic.title,
+                  comic: comic,
                   margin: !isLast ? const EdgeInsets.only(right: 15) : null,
                 );
               }).toList(),

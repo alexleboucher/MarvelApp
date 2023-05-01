@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:marvel_app/app/app.dart';
+import 'package:marvel_app/app/cubit/favorites_cubit.dart';
 import 'package:marvel_app/home/home.dart';
 import 'package:marvel_repository/marvel_repository.dart';
 
@@ -23,8 +24,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => _marvelRepository,
-      child: BlocProvider(
-        create: (_) => ThemeCubit(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => ThemeCubit(),
+          ),
+          BlocProvider(
+            create: (_) => FavoritesCubit(),
+          ),
+        ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, theme) {
             return MaterialApp(

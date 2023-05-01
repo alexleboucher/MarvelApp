@@ -59,7 +59,8 @@ class DiscoverCubit extends Cubit<DiscoverState> {
       );
     } on Exception {
       emit(
-          state.copyWith(comicsReleasedLastWeekStatus: DiscoverStatus.failure));
+        state.copyWith(comicsReleasedLastWeekStatus: DiscoverStatus.failure),
+      );
     }
   }
 }
