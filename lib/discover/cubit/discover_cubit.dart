@@ -8,6 +8,7 @@ class DiscoverCubit extends Cubit<DiscoverState> {
   DiscoverCubit(this._marvelRepository) : super(const DiscoverState()) {
     fetchNewThisWeekComics();
     fetchReleasedLastWeekComics();
+    fetchStartedThisYearComics();
   }
 
   final MarvelRepository _marvelRepository;
@@ -60,6 +61,34 @@ class DiscoverCubit extends Cubit<DiscoverState> {
     } on Exception {
       emit(
         state.copyWith(comicsReleasedLastWeekStatus: DiscoverStatus.failure),
+      );
+    }
+  }
+
+  Future<void> fetchStartedThisYearComics() async {
+    emit(
+      state.copyWith(
+        comicsStartedThisYearStatus: DiscoverStatus.loading,
+        comicsStartedThisYear: [],
+      ),
+    );
+
+    try {
+      final comicsResponse = await _marvelRepository.getComics(
+        orderBy: OrderBy.focDateASC,
+        startYear: DateTime.now().year,
+        issueNumber: 1,
+      );
+
+      emit(
+        state.copyWith(
+          comicsStartedThisYearStatus: DiscoverStatus.success,
+          comicsStartedThisYear: comicsResponse.results,
+        ),
+      );
+    } on Exception {
+      emit(
+        state.copyWith(comicsStartedThisYearStatus: DiscoverStatus.failure),
       );
     }
   }

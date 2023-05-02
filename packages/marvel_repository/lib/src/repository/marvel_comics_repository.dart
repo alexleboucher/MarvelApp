@@ -7,6 +7,8 @@ extension MarvelComicsRepository on MarvelRepository {
     DateDescriptor? dateDescriptor,
     OrderBy orderBy = OrderBy.titleASC,
     FormatType formatType = FormatType.comic,
+    int? startYear,
+    int? issueNumber,
   }) async {
     final comicsResponse = await _marvelApi.getComics(
       offset: offset,
@@ -14,6 +16,8 @@ extension MarvelComicsRepository on MarvelRepository {
       dateDescriptor: dateDescriptor,
       orderBy: orderBy,
       formatType: formatType,
+      startYear: startYear,
+      issueNumber: issueNumber,
     );
 
     final results = <Comic>[];

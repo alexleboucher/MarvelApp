@@ -41,36 +41,38 @@ class ComicCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context).colorScheme.shadow,
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                      offset: const Offset(0, 3),
-                    )
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: comic.thumbnailUrl != null
-                      ? Image.network(
-                          comic.thumbnailUrl!,
-                          loadingBuilder: (
-                            BuildContext context,
-                            Widget child,
-                            ImageChunkEvent? loadingProgress,
-                          ) {
-                            if (loadingProgress == null) {
-                              return child;
-                            }
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          },
-                        )
-                      : Image.asset('assets/images/no_cover.jpg'),
+              child: Center(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Theme.of(context).colorScheme.shadow,
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: const Offset(0, 3),
+                      )
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: comic.thumbnailUrl != null
+                        ? Image.network(
+                            comic.thumbnailUrl!,
+                            loadingBuilder: (
+                              BuildContext context,
+                              Widget child,
+                              ImageChunkEvent? loadingProgress,
+                            ) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
+                          )
+                        : Image.asset('assets/images/no_cover.jpg'),
+                  ),
                 ),
               ),
             ),

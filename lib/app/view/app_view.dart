@@ -49,6 +49,7 @@ class App extends StatelessWidget {
               theme: AppTheme.getTheme(themeMode: theme.themeMode),
               routerDelegate: routerDelegate,
               routeInformationParser: BeamerParser(),
+              debugShowCheckedModeBanner: false,
             );
           },
         ),

@@ -38,6 +38,9 @@ extension MarvelComicsApi on MarvelApi {
     DateDescriptor? dateDescriptor,
     OrderBy orderBy = OrderBy.titleASC,
     FormatType formatType = FormatType.comic,
+    bool noVariants = true,
+    int? startYear,
+    int? issueNumber,
   }) async {
     final credentials = _getCredentials();
     final request = Uri.https(
@@ -51,7 +54,10 @@ extension MarvelComicsApi on MarvelApi {
         'limit': limit.toString(),
         'orderBy': orderBy.parseToString(),
         'formatType': formatType.name,
+        'noVariants': noVariants.toString(),
         if (dateDescriptor != null) 'dateDescriptor': dateDescriptor.name,
+        if (startYear != null) 'startYear': startYear.toString(),
+        if (issueNumber != null) 'issueNumber': issueNumber.toString(),
       },
     );
 

@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 
 import 'package:marvel_app/discover/discover.dart';
 import 'package:marvel_app/discover/widget/comics_scroll_list.dart';
-import 'package:marvel_app/discover/widget/favorite_comics_list.dart';
 import 'package:marvel_repository/marvel_repository.dart';
 
 class DiscoverPage extends StatelessWidget {
@@ -28,14 +27,12 @@ class DiscoverView extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.all(20),
+            margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset('assets/images/marvel_discover.png'),
             ),
           ),
-          const Gap(20),
-          const FavoriteComicsList(),
           const Gap(20),
           BlocBuilder<DiscoverCubit, DiscoverState>(
             builder: (context, state) {
@@ -46,11 +43,17 @@ class DiscoverView extends StatelessWidget {
                     status: state.comicsNewThisWeekStatus,
                     comics: state.comicsNewThisWeek,
                   ),
-                  const Gap(20),
+                  const Gap(10),
                   ComicsScrollList(
                     title: 'Released last week',
                     status: state.comicsReleasedLastWeekStatus,
                     comics: state.comicsReleasedLastWeek,
+                  ),
+                  const Gap(10),
+                  ComicsScrollList(
+                    title: 'Series started in ${DateTime.now().year}',
+                    status: state.comicsStartedThisYearStatus,
+                    comics: state.comicsStartedThisYear,
                   ),
                 ],
               );

@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marvel_app/discover/discover.dart';
+import 'package:marvel_app/favorites/view/favorites_page.dart';
 import 'package:marvel_app/home/home.dart';
 
 class HomePage extends StatelessWidget {
@@ -31,7 +32,7 @@ class HomeView extends StatelessWidget {
           children: const [
             DiscoverPage(),
             Placeholder(),
-            Placeholder(),
+            FavoritesPage(),
           ],
         ),
       ),
