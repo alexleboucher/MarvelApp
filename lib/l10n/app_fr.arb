@@ -16,8 +16,8 @@
     },
     "noFavoritesYet": "Vous n'avez pas encore de favoris.",
     "saveFavoriteHint": "Pour enregistrer un favori, cliquez 2 fois sur un comic.",
-    "newThisWeek": "Sorti cette semaine",
-    "releasedLastWeek": "Sorti la semaine dernière",
+    "newThisWeek": "Sortis cette semaine",
+    "releasedLastWeek": "Sortis la semaine dernière",
     "seriesStartedIn": "Séries de {year}",
     "@seriesStartedIn": {
         "placeholders": {
