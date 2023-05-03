@@ -13,6 +13,7 @@ class FavoritesPage extends StatelessWidget {
           fontWeight: FontWeight.w600,
         );
     final state = context.select((FavoritesCubit cubit) => cubit.state);
+    final favoriteComicsTotal = state.favoriteComics.length;
 
     return LayoutBuilder(
       builder: (context, constraint) {
@@ -27,7 +28,7 @@ class FavoritesPage extends StatelessWidget {
                   ...state.favoriteComics.isNotEmpty
                       ? [
                           Text(
-                            'Your favorite comics (${state.favoriteComics.length})',
+                            'Your favorite comics ($favoriteComicsTotal)',
                             style: titleStyle,
                           ),
                           const Gap(25),
@@ -39,7 +40,12 @@ class FavoritesPage extends StatelessWidget {
                             crossAxisSpacing: 12,
                             shrinkWrap: true,
                             children: state.favoriteComics
-                                .map((e) => ComicCard(comic: e))
+                                .map(
+                                  (e) => ComicCard(
+                                    comic: e,
+                                    canRemoveFavorite: true,
+                                  ),
+                                )
                                 .toList(),
                           ),
                           const Gap(20),
@@ -59,7 +65,7 @@ class FavoritesPage extends StatelessWidget {
                                   Gap(5),
                                   Text(
                                     textAlign: TextAlign.center,
-                                    'To save a favorite, touch and hold a comic card.',
+                                    'To save a favorite, double tap on a comic card.',
                                   ),
                                 ],
                               ),
