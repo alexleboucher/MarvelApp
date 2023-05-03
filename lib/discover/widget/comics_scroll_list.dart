@@ -24,7 +24,7 @@ class ComicsScrollList extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.only(left: 20, right: 8),
           child: TitleSeeAll(
             title: title,
             onSeeAllClick: () => homeCubit.setTab(HomeTab.search),

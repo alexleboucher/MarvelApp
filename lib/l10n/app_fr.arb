@@ -1,0 +1,29 @@
+{
+    "settings": "Paramètres",
+    "darkTheme": "Thème sombre",
+    "language": "Langage",
+    "explore": "Explorer",
+    "search": "Rechercher",
+    "favorites": "Favoris",
+    "seeAll": "Tout voir",
+    "yourFavoritesComics": "Vos comics favoris ({number})",
+    "@yourFavoritesComics": {
+        "placeholders": {
+            "number": {
+                "type": "num"
+            }
+        }
+    },
+    "noFavoritesYet": "Vous n'avez pas encore de favoris.",
+    "saveFavoriteHint": "Pour enregistrer un favori, cliquez 2 fois sur un comic.",
+    "newThisWeek": "Sorti cette semaine",
+    "releasedLastWeek": "Sorti la semaine dernière",
+    "seriesStartedIn": "Séries de {year}",
+    "@seriesStartedIn": {
+        "placeholders": {
+            "year": {
+                "type": "num"
+            }
+        }
+  }
+}

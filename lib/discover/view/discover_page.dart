@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
-
 import 'package:marvel_app/discover/discover.dart';
 import 'package:marvel_app/discover/widget/comics_scroll_list.dart';
 import 'package:marvel_repository/marvel_repository.dart';
@@ -39,19 +39,20 @@ class DiscoverView extends StatelessWidget {
               return Column(
                 children: [
                   ComicsScrollList(
-                    title: 'New this week',
+                    title: AppLocalizations.of(context)!.newThisWeek,
                     status: state.comicsNewThisWeekStatus,
                     comics: state.comicsNewThisWeek,
                   ),
                   const Gap(10),
                   ComicsScrollList(
-                    title: 'Released last week',
+                    title: AppLocalizations.of(context)!.releasedLastWeek,
                     status: state.comicsReleasedLastWeekStatus,
                     comics: state.comicsReleasedLastWeek,
                   ),
                   const Gap(10),
                   ComicsScrollList(
-                    title: 'Series started in ${DateTime.now().year}',
+                    title: AppLocalizations.of(context)!
+                        .seriesStartedIn(DateTime.now().year),
                     status: state.comicsStartedThisYearStatus,
                     comics: state.comicsStartedThisYear,
                   ),

@@ -15,12 +15,14 @@ dependencies:
   flutter_bloc: ^8.1.2
   flutter_dotenv: ^5.0.2
   flutter_launcher_icons: ^0.13.0
+  flutter_localizations:
+    sdk: flutter
   flutter_native_splash: ^2.2.19
   gap: ^2.0.1
   google_fonts: ^4.0.3
   http: ^0.13.5
   hydrated_bloc: ^9.1.0
-  intl: ^0.18.0
+  intl: any
   marvel_repository:
     path: packages/marvel_repository
   path_provider: ^2.0.14
@@ -32,6 +34,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
   - .env

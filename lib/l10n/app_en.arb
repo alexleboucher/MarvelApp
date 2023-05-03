@@ -1,0 +1,29 @@
+{
+    "settings": "Settings",
+    "darkTheme": "Dart theme",
+    "language": "Language",
+    "explore": "Explorer",
+    "search": "Search",
+    "favorites": "Favorites",
+    "seeAll": "See all",
+    "yourFavoritesComics": "Your favorite comics ({number})",
+    "@yourFavoritesComics": {
+        "placeholders": {
+            "number": {
+                "type": "num"
+            }
+        }
+    },
+    "noFavoritesYet": "You don't have any favorites yet.",
+    "saveFavoriteHint": "To save a favorite, double tap on a comic card.",
+    "newThisWeek": "New this week",
+    "releasedLastWeek": "Released last week",
+    "seriesStartedIn": "Series started in ({year})",
+    "@seriesStartedIn": {
+        "placeholders": {
+            "year": {
+                "type": "num"
+            }
+        }
+    }
+}

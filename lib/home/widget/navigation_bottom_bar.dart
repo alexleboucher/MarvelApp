@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:marvel_app/home/home.dart';
 
 class NavigationBottomBar extends StatelessWidget {
@@ -14,21 +14,21 @@ class NavigationBottomBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       onTap: (index) => context.read<HomeCubit>().setTab(HomeTab.values[index]),
       currentIndex: selectedTab.index,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.explore_outlined),
-          activeIcon: Icon(Icons.explore),
-          label: 'Explore',
+          icon: const Icon(Icons.explore_outlined),
+          activeIcon: const Icon(Icons.explore),
+          label: AppLocalizations.of(context)!.explore,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          activeIcon: Icon(Icons.search),
-          label: 'Search',
+          icon: const Icon(Icons.search),
+          activeIcon: const Icon(Icons.search),
+          label: AppLocalizations.of(context)!.search,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_border),
-          activeIcon: Icon(Icons.favorite),
-          label: 'Favorites',
+          icon: const Icon(Icons.favorite_border),
+          activeIcon: const Icon(Icons.favorite),
+          label: AppLocalizations.of(context)!.favorites,
         ),
       ],
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
 import 'package:marvel_app/app/cubit/favorites_cubit.dart';
 import 'package:marvel_app/shared/widgets/comic_card.dart';
@@ -28,7 +29,8 @@ class FavoritesPage extends StatelessWidget {
                   ...state.favoriteComics.isNotEmpty
                       ? [
                           Text(
-                            'Your favorite comics ($favoriteComicsTotal)',
+                            AppLocalizations.of(context)!
+                                .yourFavoritesComics(favoriteComicsTotal),
                             style: titleStyle,
                           ),
                           const Gap(25),
@@ -57,15 +59,17 @@ class FavoritesPage extends StatelessWidget {
                             child: Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   Text(
+                                    AppLocalizations.of(context)!
+                                        .noFavoritesYet,
                                     textAlign: TextAlign.center,
-                                    "You don't have any favorites yet.",
                                   ),
-                                  Gap(5),
+                                  const Gap(5),
                                   Text(
+                                    AppLocalizations.of(context)!
+                                        .saveFavoriteHint,
                                     textAlign: TextAlign.center,
-                                    'To save a favorite, double tap on a comic card.',
                                   ),
                                 ],
                               ),

@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:marvel_app/app/app.dart';
 import 'package:marvel_app/app/cubit/favorites_cubit.dart';
 import 'package:marvel_app/home/home.dart';
@@ -37,19 +38,22 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => ThemeCubit(),
+            create: (_) => SettingsCubit(),
           ),
           BlocProvider(
             create: (_) => FavoritesCubit(),
           ),
         ],
-        child: BlocBuilder<ThemeCubit, ThemeState>(
-          builder: (context, theme) {
+        child: BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, settings) {
             return MaterialApp.router(
-              theme: AppTheme.getTheme(themeMode: theme.themeMode),
+              theme: AppTheme.getTheme(themeMode: settings.themeMode),
               routerDelegate: routerDelegate,
               routeInformationParser: BeamerParser(),
               debugShowCheckedModeBanner: false,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: settings.locale,
             );
           },
         ),
